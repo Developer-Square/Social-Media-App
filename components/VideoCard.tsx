@@ -10,10 +10,9 @@ import { Video } from '../types';
 
 interface IProps {
   post: Video;
-  key: string;
 }
 
-const VideoCard: NextPage<IProps> = ({ post, key }) => {
+const VideoCard: NextPage<IProps> = ({ post }) => {
   const [isHover, setIsHover] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -40,7 +39,7 @@ const VideoCard: NextPage<IProps> = ({ post, key }) => {
   };
 
   return (
-    <div className='flex flex-col border-b-2 border-gray-200 pb-6' key={key}>
+    <div className='flex flex-col border-b-2 border-gray-200 pb-6'>
       <div>
         <div className='flex gap-3 p-2 cursor-pointer font-semibold rounded'>
           <div className='md:w-16 md:h-16 w-10 h-10'>
