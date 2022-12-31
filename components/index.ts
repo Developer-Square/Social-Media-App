@@ -5,6 +5,8 @@ import Footer from './Footer';
 import SuggestedAccounts from './SuggestedAccounts';
 import NoResults from './NoResults';
 import VideoCard from './VideoCard';
+import LikeButton from './LikeButton';
+import Comments from './Comments';
 
 export {
   Navbar,
@@ -14,4 +16,6 @@ export {
   Footer,
   NoResults,
   VideoCard,
+  LikeButton,
+  Comments,
 };
