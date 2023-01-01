@@ -24,9 +24,10 @@ const Detail: NextPage<IProps> = ({ postDetails: { data } }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { userProfile } = useAuthStore();
+  const [comment, setComment] = useState('');
+  const [isPostingComment, setIsPostingComment] = useState(false);
 
   if (!post) return null;
-
   const onVideoClick = () => {
     if (isPlaying && videoRef) {
       videoRef.current?.pause();
@@ -56,6 +57,22 @@ const Detail: NextPage<IProps> = ({ postDetails: { data } }) => {
       });
 
       setPost({ ...post, likes: data.likes });
+    }
+  };
+
+  const addComment = async (e: any) => {
+    e.preventDefault();
+
+    if (Object.keys(userProfile).length) {
+      setIsPostingComment(true);
+      const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
+        userId: userProfile._id,
+        comment,
+      });
+
+      setPost({ ...post, comments: data.comments });
+      setComment('');
+      setIsPostingComment(false);
     }
   };
 
@@ -145,7 +162,13 @@ const Detail: NextPage<IProps> = ({ postDetails: { data } }) => {
               <></>
             )}
           </div>
-          <Comments />
+          <Comments
+            comments={post.comments}
+            comment={comment}
+            setComment={setComment}
+            addComment={addComment}
+            isPostingComment={isPostingComment}
+          />
         </div>
       </div>
     </div>
