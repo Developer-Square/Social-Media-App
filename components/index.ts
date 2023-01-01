@@ -7,6 +7,7 @@ import NoResults from './NoResults';
 import VideoCard from './VideoCard';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import ProfileName from './ProfileName';
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   VideoCard,
   LikeButton,
   Comments,
+  ProfileName,
 };

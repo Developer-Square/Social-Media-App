@@ -1,8 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
 import useAuthStore from '../store/authStore';
-import { NoResults } from '.';
+import { NoResults, ProfileName } from '.';
 import { NextPage } from 'next';
+import Link from 'next/link';
 
 interface IProps {
   isPostingComment: Boolean;
@@ -16,7 +17,7 @@ interface IComment {
   comment: string;
   length?: number;
   _key: string;
-  postedBy: { _ref: string };
+  postedBy: { _ref: string; _id: string };
 }
 
 const Comments: NextPage<IProps> = ({
@@ -26,13 +27,36 @@ const Comments: NextPage<IProps> = ({
   addComment,
   setComment,
 }) => {
-  const { userProfile } = useAuthStore();
+  const { userProfile, allUsers } = useAuthStore();
 
   return (
     <div className='border-t-2 border-gray-200 pt-4 px-10 bg-[#F8F8F8] border-b-2 lg:pb-0 pb-[100px]'>
       <div className='overflow-scroll lg:h-[475px]'>
         {comments?.length ? (
-          <div>Videos</div>
+          comments.map((item: IComment) => (
+            <div key={item.postedBy._ref}>
+              {allUsers.map(
+                (user) =>
+                  user._id === (item.postedBy._ref || item.postedBy._id) && (
+                    <div className='p-2 items-center' key={item._key}>
+                      <Link href={`/profile/${user._id}`}>
+                        <div className='flex items-center gap-3'>
+                          <ProfileName
+                            userName={user.userName}
+                            image={user.image}
+                            _id={''}
+                            _type={''}
+                          />
+                        </div>
+                      </Link>
+                      <div>
+                        <p>{item.comment}</p>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
+          ))
         ) : (
           <NoResults text='No comments yet' />
         )}
