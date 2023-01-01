@@ -5,7 +5,6 @@ import { GoVerified } from 'react-icons/go';
 import { IUser } from '../types';
 
 const ProfileName = ({ userName, image }: IUser) => {
-  console.log(userName, image);
   return (
     <>
       <div className='w-8 h-8'>
