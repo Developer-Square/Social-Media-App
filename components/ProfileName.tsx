@@ -5,7 +5,7 @@ import { GoVerified } from 'react-icons/go';
 import { IUser } from '../types';
 
 interface IProps extends IUser {
-  location: boolean;
+  location?: boolean;
 }
 
 const ProfileName = ({ userName, image, location }: IProps) => {
