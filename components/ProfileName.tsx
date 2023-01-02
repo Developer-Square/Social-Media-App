@@ -4,14 +4,18 @@ import { GoVerified } from 'react-icons/go';
 
 import { IUser } from '../types';
 
-const ProfileName = ({ userName, image }: IUser) => {
+interface IProps extends IUser {
+  location: boolean;
+}
+
+const ProfileName = ({ userName, image, location }: IProps) => {
   return (
     <>
-      <div className='w-8 h-8'>
+      <div className={location ? '' : `w-8 h-8`}>
         <Image
           src={image}
-          width={34}
-          height={34}
+          width={location ? 50 : 34}
+          height={location ? 50 : 34}
           className='rounded-full'
           alt='user profile'
         />
